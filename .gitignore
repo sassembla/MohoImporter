@@ -1,0 +1,47 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# ============ #
+# for others   #
+# ============ #
+
+*.log #log files, for some plugins
+*.pyc #python bytecode cache, for some plugins.
+sysinfo.txt #Unity3D Generated File On Crash Reports
+mohoimporter2019/mohoimporter2019/Assets/TestFolder/*
+
+mohoimporter2019/mohoimporter2019/.vscode/settings.json
+mohoimporter2019/mohoimporter2019/Packages/manifest.json
+mohoimporter2019/mohoimporter2019/Packages/packages-lock.json
+mohoimporter2019/mohoimporter2019/ProjectSettings/PackageManagerSettings.asset
