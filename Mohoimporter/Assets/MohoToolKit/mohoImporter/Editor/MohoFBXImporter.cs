@@ -223,7 +223,6 @@ public class MohoFBXImporter : AssetPostprocessor
 
     void OnPostprocessAnimation(GameObject g, AnimationClip clip)
     {
-        Debug.Log("AnimCreate!!");
 
         // Only operate on FBX files
         if (assetPath.IndexOf(".fbx") == -1)
@@ -237,12 +236,23 @@ public class MohoFBXImporter : AssetPostprocessor
             return;
         }
 
+        Debug.Log("AnimCreate!!");
+
         var filePath = System.IO.Path.GetDirectoryName(assetPath);
         string filepath = filePath + "/" + g.name + "_anim/";
+        Debug.Log(">>" + filepath);
 
         if (!Directory.Exists(filepath))
+        {
+            Debug.Log("ディレクトリ作るよ！");
             Directory.CreateDirectory(filepath);
+            AssetDatabase.Refresh();
 
+            //TODO:問題の本質はここじゃないかもだけど、
+            //　　　いったんここで少し待ってディレクトリが見れるようにしたい。
+        }
+
+        
         string exportPath = filepath + "/" + clip.name + ".anim";
         string tempPath = filePath + "/temp.anim";
 
@@ -255,7 +265,7 @@ public class MohoFBXImporter : AssetPostprocessor
         ClipPath = exportPath;
 
         File.Copy(tempPath, exportPath, true);
-        File.Delete(tempPath);
+        File.Delete(tempPath);　//<<これも動かないのが謎
 
         AssetDatabase.Refresh();
     }
