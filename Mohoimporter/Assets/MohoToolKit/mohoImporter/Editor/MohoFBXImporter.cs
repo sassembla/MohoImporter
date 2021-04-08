@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.IO;
 using UnityEditor;
 using UnityEditor.Animations;
-using System;
-using System.IO;
-using System.Collections;
+using UnityEngine;
+using System.Reflection;
 
 public class MohoFBXImporter : AssetPostprocessor
 {
@@ -136,16 +137,27 @@ public class MohoFBXImporter : AssetPostprocessor
                 Debug.LogError("r.sharedMaterial.GetTexture(_MainTex) が見つからなかった r:" + r);
                 continue;
             }
-            string texPath = AssetDatabase.GetAssetPath(tex);
-            TextureImporter _ti = AssetImporter.GetAtPath(texPath) as TextureImporter;
-            _ti.mipmapEnabled = false;
-            _ti.wrapMode = TextureWrapMode.Clamp;
+            else
+            {
+                string texPath = AssetDatabase.GetAssetPath(tex);
+                Debug.Log("    >>>>>>  " + texPath);
 
-            EditorUtility.SetDirty(_ti);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            AssetDatabase.ImportAsset(texPath, ImportAssetOptions.ForceUpdate);
+                var _p = AssetImporter.GetAtPath(texPath);
+
+
+                TextureImporter _ti = _p as TextureImporter;
+                _ti.mipmapEnabled = false;
+                _ti.wrapMode = TextureWrapMode.Clamp;
+
+                EditorUtility.SetDirty(_ti);
+                //AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                //AssetDatabase.ImportAsset(texPath, ImportAssetOptions.ForceUpdate);
+            }
         }
+
+        AssetDatabase.SaveAssets();
+        //AssetDatabase.Refresh();
 
         //Import時に変なScaleが入っていた時はScale1に戻す
         //必要なら、Animationの方にScaleが入っているからこちらは見えるようにします
@@ -244,10 +256,24 @@ public class MohoFBXImporter : AssetPostprocessor
 
         if (!Directory.Exists(filepath))
         {
-            Debug.Log("ディレクトリ作るよ！");
-            Directory.CreateDirectory(filepath);
+            Debug.Log("ディレクトリ作るよ！ >>" + g.name + "  Path >>" + System.IO.Path.GetDirectoryName(assetPath));
+            var _nFolerId = AssetDatabase.CreateFolder(System.IO.Path.GetDirectoryName(assetPath), g.name + "_anim");
+
+            AssetDatabase.ImportAsset(AssetDatabase.GUIDToAssetPath(_nFolerId));
+            //Directory.CreateDirectory(filepath);
             AssetDatabase.Refresh();
 
+            ////https://qiita.com/Rijicho_nl/items/e6b693d7b45339de358e
+            //Type projectwindowtype = Assembly.Load("UnityEditor").GetType("UnityEditor.ProjectBrowser");
+            //EditorWindow projectwindow = EditorWindow.GetWindow(projectwindowtype, false, "Project", false);
+
+            ////AssetのInstanceIDを所得してフォルダーのIDを所得
+            //var _obj = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(AssetDatabase.GetAssetPath(g));
+            //EditorGUIUtility.PingObject(_obj);
+
+
+
+            //EditorApplication.update = ProjectWindowUtil
             //TODO:問題の本質はここじゃないかもだけど、
             //　　　いったんここで少し待ってディレクトリが見れるようにしたい。
         }
@@ -261,11 +287,15 @@ public class MohoFBXImporter : AssetPostprocessor
         //AnimationClipをいじるならここ！
         ErrorChechAnimation(ref copyClip);
 
-        AssetDatabase.CreateAsset(copyClip, tempPath);
-        ClipPath = exportPath;
+        AssetDatabase.CreateAsset(copyClip, exportPath);
 
-        File.Copy(tempPath, exportPath, true);
-        File.Delete(tempPath);　//<<これも動かないのが謎
+        //AssetDatabase.CreateAsset(copyClip, tempPath);
+        //ClipPath = exportPath;
+
+        //File.Copy(tempPath, exportPath, true);
+        //File.Delete(tempPath);　//<<これも動かないのが謎
+
+        AssetDatabase.ImportAsset(AssetDatabase.GUIDToAssetPath(exportPath));
 
         AssetDatabase.Refresh();
     }

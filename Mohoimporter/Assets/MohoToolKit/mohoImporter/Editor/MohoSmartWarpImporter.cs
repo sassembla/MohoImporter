@@ -119,7 +119,9 @@ public class MohoSmartWarpImporter : EditorWindow
 
         var json = (IDictionary)Json.Deserialize(jsonData);
 
-        var runner = new MohoSmartWarpImporter();
+        //https://robamemo.hatenablog.com/entry/2019/10/17/150758
+        //var runner = new MohoSmartWarpImporter();
+        var runner = ScriptableObject.CreateInstance("MohoSmartWarpImporter") as MohoSmartWarpImporter;
 
         //jsonの復号
         runner.ReadAnimationJson(ref json);
