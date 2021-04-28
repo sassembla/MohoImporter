@@ -1,8 +1,12 @@
 # MohoFBXImporter
  Version 0.5
-  
-# 概要  
- Mohoで作成したSmartWarpアニメーションをUnityにImportすることができます。  
+
+# 概要 (これはなに？)
+  Mohoという２Dアニメーションツールで作成したSmartWarpアニメーションをUnityにImportする便利Importerです。
+
+#　できること
+　Mohoで作ったSmartWarpを使ったアニメーションを同じようにUnityで動かすことができます。
+　またMohoの中で動かしたものやBoneを設定したものも持ってくることができます。
 
 # MohoFBXImporterの内容  
 * MohoScript
@@ -11,9 +15,9 @@
 * Unity Editor拡張
   ・MohoFBXImporter  
 
-
-# 利用準備  
-※Scriptを配置する準備ができているのなら3)から作業してください。
+#  使用法/インストール方法
+※MohoでScriptを動かす準備ができているのなら3)から作業してください。
+  よくわからないなという人はそのまま進めてみてください。
 
 * MohoのSetUp
   1) 任意の場所に、mohoのScritを置くフォルダを作成します。  
@@ -56,5 +60,8 @@
   マテリアル、テクスチャ等を削除してからReimportを行ってください  
 
 # 既知の問題  
-  ・Macではパーツのプライオリティが荒れてしまいます。Windowsでも同様の問題が起きています。  
 
+#  ライセンス
+
+#  contributors
+  株式会社IRIAM

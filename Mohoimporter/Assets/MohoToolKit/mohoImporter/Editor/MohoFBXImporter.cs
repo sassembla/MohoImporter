@@ -147,7 +147,7 @@ public class MohoFBXImporter : AssetPostprocessor
 
                 TextureImporter _ti = _p as TextureImporter;
                 _ti.mipmapEnabled = false;
-                _ti.wrapMode = TextureWrapMode.Clamp;
+                _ti.wrapMode = TextureWrapMode.Mirror;
 
                 EditorUtility.SetDirty(_ti);
                 //AssetDatabase.SaveAssets();
