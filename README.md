@@ -1,7 +1,7 @@
 # MohoFBXImporter
  Version 0.5
   
-![run](https://user-images.githubusercontent.com/944441/117318206-29eb2a00-aec5-11eb-8dab-8a20db30676c.mp4)
+https://user-images.githubusercontent.com/944441/117318206-29eb2a00-aec5-11eb-8dab-8a20db30676c.mp4
 
 # 概要  
  Mohoで作成したSmartWarpアニメーションをUnityにImportすることができます。  
