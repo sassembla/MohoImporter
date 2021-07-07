@@ -60,3 +60,5 @@ https://user-images.githubusercontent.com/944441/117318206-29eb2a00-aec5-11eb-8d
 # 既知の問題  
   ・Macではパーツのプライオリティが荒れてしまいます。Windowsでも同様の問題が起きています。  
 
+# Moho Importer is..
+supported by IRIAM
